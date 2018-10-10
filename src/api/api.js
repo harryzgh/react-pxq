@@ -1,5 +1,10 @@
 import Server from './server'
 
+/**
+ * http://www.ruanyifeng.com/blog/2015/05/async.html
+ * 同 Generator 函数一样，async 函数返回一个 Promise 对象，可以使用 then 方法添加回调函数。
+ * 当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再接着执行函数体内后面的语句。
+ */
 class API extends Server {
     /**
    *  用途：上传图片
@@ -10,6 +15,7 @@ class API extends Server {
    */
     async uploadImg (params = {}) {
         try {
+            // await 后面是异步操作，有await的地方会等异步操作执行完成才会执行后面的语句
             let result = await this.axios('post', '//elm.cangdu.org/v1/addimg/shop', params)
             if (result && result.status === 1) {
                 return result
